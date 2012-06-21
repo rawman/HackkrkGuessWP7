@@ -18,6 +18,8 @@ namespace HackrkGuessWP7 {
 			container.RegisterPhoneServices();
             container.PerRequest<MainPageViewModel>();
             container.PerRequest<RegistrationViewModel>();
+            container.PerRequest<RiddleListViewModel>();
+            container.RegisterSingleton(typeof(RegistrationService), null, typeof(RegistrationService));
 
             AddCustomConventions();
         }

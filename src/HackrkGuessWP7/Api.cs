@@ -13,6 +13,6 @@ namespace HackrkGuessWP7
 {
     public class Api
     {
-        public static readonly Uri Host =  new Uri("http://hackkrk-guess-static.herokuapp.com");
+        public static readonly Uri Host = new Uri("http://hackkrk-guess-static.herokuapp.com");
     }
 }

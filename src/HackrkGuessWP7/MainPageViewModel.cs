@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Windows;
 using Caliburn.Micro;
 using HackrkGuessWP7.ViewModels;
 using Spring.Http.Converters.Json;
@@ -9,10 +10,25 @@ namespace HackrkGuessWP7 {
     public class MainPageViewModel : Screen
     {
         private INavigationService _navigationService;
+        private RegistrationService _registrationService;
 
-        public MainPageViewModel(INavigationService navigationService)
+        public MainPageViewModel(INavigationService navigationService, RegistrationService registrationService)
         {
             _navigationService = navigationService;
+            _registrationService = registrationService;
+            _registrationService.RegistrationFinished += _registrationService_RegistrationFinished;
+        }
+
+        void _registrationService_RegistrationFinished(object sender, RegistrationFinishedEventArgs e)
+        {
+            if(e.Exception == null)
+            {
+                _navigationService.UriFor<RiddleListViewModel>().Navigate();
+            }
+            else
+            {
+                MessageBox.Show(e.Exception.Message);
+            }
         }
 
         public void SignIn()
@@ -27,15 +43,7 @@ namespace HackrkGuessWP7 {
 
         public void CreateAccount()
         {
-            RestTemplate template = new RestTemplate(Api.Host);
-            template.MessageConverters.Add(new NJsonHttpMessageConverter());
-
-            var body = new RegistrationRequest() {username = UserName, password = Password};
-
-            template.PostForObjectAsync<RegistrationResponse>("/user", body, r =>
-            {
-                int k = 0;
-            } );
+            _registrationService.Register(UserName, Password);
         }
 
         public string UserName { get; set; }
