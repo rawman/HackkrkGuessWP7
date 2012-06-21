@@ -1,4 +1,6 @@
-﻿namespace HackrkGuessWP7 {
+﻿using HackrkGuessWP7.ViewModels;
+
+namespace HackrkGuessWP7 {
     using System;
     using System.Collections.Generic;
     using System.Windows.Controls;
@@ -15,6 +17,7 @@
 
 			container.RegisterPhoneServices();
             container.PerRequest<MainPageViewModel>();
+            container.PerRequest<RegistrationViewModel>();
 
             AddCustomConventions();
         }
