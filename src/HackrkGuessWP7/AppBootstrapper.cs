@@ -1,4 +1,5 @@
 ﻿using HackrkGuessWP7.Configuration;
+﻿using HackrkGuessWP7.ViewModels;
 
 namespace HackrkGuessWP7 {
     using System;
@@ -17,6 +18,7 @@ namespace HackrkGuessWP7 {
 
 			container.RegisterPhoneServices();
             container.PerRequest<MainPageViewModel>();
+            container.PerRequest<RegistrationViewModel>();
 
             container.RegisterSingleton(typeof(IApplicationConfiguration), "IApplicationConfiguration", typeof(ApplicationConfiguration));
 
