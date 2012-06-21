@@ -9,6 +9,7 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:AppBootstrapper x:Key="bootstrapper" />
+        <ResourceDictionary Source="Configuration/ApplicationConfiguration.xaml" x:Key="Configuration"/>
     </Application.Resources>
 
 </Application>

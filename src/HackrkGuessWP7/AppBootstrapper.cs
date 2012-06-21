@@ -1,4 +1,6 @@
-﻿namespace HackrkGuessWP7 {
+﻿using HackrkGuessWP7.Configuration;
+
+namespace HackrkGuessWP7 {
     using System;
     using System.Collections.Generic;
     using System.Windows.Controls;
@@ -15,6 +17,8 @@
 
 			container.RegisterPhoneServices();
             container.PerRequest<MainPageViewModel>();
+
+            container.RegisterSingleton(typeof(IApplicationConfiguration), "IApplicationConfiguration", typeof(ApplicationConfiguration));
 
             AddCustomConventions();
         }
