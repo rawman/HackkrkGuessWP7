@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using Caliburn.Micro;
+using HackrkGuessWP7.Configuration;
 using HackrkGuessWP7.ViewModels;
 using Spring.Http.Converters.Json;
 using Spring.Rest.Client;
@@ -9,10 +10,12 @@ namespace HackrkGuessWP7 {
     public class MainPageViewModel : Screen
     {
         private INavigationService _navigationService;
+        private readonly IApplicationConfiguration _configuration;
 
-        public MainPageViewModel(INavigationService navigationService)
+        public MainPageViewModel(INavigationService navigationService, IApplicationConfiguration configuration)
         {
             _navigationService = navigationService;
+            _configuration = configuration;
         }
 
         public void SignIn()

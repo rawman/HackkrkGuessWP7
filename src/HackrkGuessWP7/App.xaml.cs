@@ -26,9 +26,9 @@ namespace HackrkGuessWP7
             InitializeComponent();
         }
 
-        public ApplicationConfiguration Configuration
+        public ApplicationStagingConfiguration StagingConfiguration
         {
-            get { return (ApplicationConfiguration)this.Resources["Configuration"]; }
+            get { return (ApplicationStagingConfiguration)this.Resources["Configuration"]; }
         } 
 
     }

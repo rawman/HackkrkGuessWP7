@@ -20,7 +20,7 @@ namespace HackrkGuessWP7 {
             container.PerRequest<MainPageViewModel>();
             container.PerRequest<RegistrationViewModel>();
 
-            container.RegisterSingleton(typeof(IApplicationConfiguration), "IApplicationConfiguration", typeof(ApplicationConfiguration));
+            container.RegisterSingleton(typeof(IApplicationConfiguration), "IApplicationConfiguration", typeof(ApplicationStagingConfiguration));
 
             AddCustomConventions();
         }
