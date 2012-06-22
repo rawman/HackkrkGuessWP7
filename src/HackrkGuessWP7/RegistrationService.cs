@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,15 +18,33 @@ namespace HackrkGuessWP7
         public event EventHandler<RegistrationFinishedEventArgs> RegistrationFinished = delegate { }; 
 
         private string _token;
+        private readonly RestTemplate _restTemplate;
+
+        public RegistrationService()
+        {
+            _restTemplate = new RestTemplate(Api.Host);
+            _restTemplate.MessageConverters.Add(new NJsonHttpMessageConverter());
+        }
 
         public void Register(string userName, string password)
         {
-            RestTemplate template = new RestTemplate(Api.Host);
-            template.MessageConverters.Add(new NJsonHttpMessageConverter());
-
             var body = new RegistrationRequest() { username = userName, password = password };
 
-            template.PostForObjectAsync<RegistrationResponse>("/user", body, r =>
+            _restTemplate.PostForObjectAsync<RegistrationResponse>("/user", body, r =>
+            {
+                if (r.Error == null)
+                {
+                    _token = r.Response.token;
+                }
+
+                RegistrationFinished(this, new RegistrationFinishedEventArgs(r.Error));
+            });
+        }
+
+        public void Login(string userName, string password)
+        {
+            var uri = string.Format("/user?username={0}password={1}", userName, password);
+            _restTemplate.GetForObjectAsync<RegistrationResponse>(uri, r =>
             {
                 if (r.Error == null)
                 {

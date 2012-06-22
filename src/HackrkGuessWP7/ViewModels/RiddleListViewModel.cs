@@ -52,15 +52,27 @@ namespace HackrkGuessWP7.ViewModels
                         ListBox riddlesList = view.riddles;
                         foreach (var riddle in r.Response.riddles)
                         {
-                            var tbx = new TextBlock() {Text = riddle.author};
-                            riddlesList.Items.Add(tbx);
+                            StackPanel panel = new StackPanel();
+                            panel.Children.Add(new TextBlock() {Text = riddle.author});
+                            
                             Image img = new Image();
-                            riddlesList.Items.Add(img);
+                            panel.Children.Add(img);
+                            panel.Tap += OnRiddleTap;
+                            panel.Tag = riddle;
+
+                            riddlesList.Items.Add(panel);
+                            
                             DownloadImage(img, riddle.photo_url);
+                            
                         }
                     } );
                 }
             });
+        }
+
+        private void OnRiddleTap(object sender, GestureEventArgs e)
+        {
+          
         }
 
         public ObservableCollection<riddle> Riddles { get; set; } 

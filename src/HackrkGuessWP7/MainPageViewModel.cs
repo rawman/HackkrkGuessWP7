@@ -33,7 +33,7 @@ namespace HackrkGuessWP7 {
 
         public void SignIn()
         {
-           
+            _registrationService.Login(UserName, Password);
         }
 
         private string Password
