@@ -1,3 +1,4 @@
+﻿using HackrkGuessWP7.Configuration;
 ﻿using HackrkGuessWP7.ViewModels;
 
 namespace HackrkGuessWP7 {
@@ -20,6 +21,8 @@ namespace HackrkGuessWP7 {
             container.PerRequest<RegistrationViewModel>();
             container.PerRequest<RiddleListViewModel>();
             container.RegisterSingleton(typeof(RegistrationService), null, typeof(RegistrationService));
+
+            container.RegisterSingleton(typeof(IApplicationConfiguration), "IApplicationConfiguration", typeof(ApplicationStagingConfiguration));
 
             AddCustomConventions();
         }

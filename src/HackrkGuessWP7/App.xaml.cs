@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HackrkGuessWP7.Configuration;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -24,6 +25,11 @@ namespace HackrkGuessWP7
         {
             InitializeComponent();
         }
+
+        public ApplicationStagingConfiguration StagingConfiguration
+        {
+            get { return (ApplicationStagingConfiguration)this.Resources["Configuration"]; }
+        } 
 
     }
 }
